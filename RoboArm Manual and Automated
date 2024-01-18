@@ -1,0 +1,87 @@
+#include <Servo.h>
+Servo S1,S2,S3,S4;
+int S1pin=8;
+int S2pin=9;
+int S3pin=10;
+int S4pin=11;
+void setup() {
+  S1.attach(S1pin);
+  S2.attach(S2pin);
+  S3.attach(S3pin);
+  S4.attach(S4pin);
+  Serial.begin(9600);
+  S1.write(90);
+  S2.write(180);
+  S3.write(20);
+  S4.write(0);
+}
+void loop() {
+if(Serial.available()){
+ char c=Serial.read();
+      if(c=='p'){
+  pick();
+  delay(2000);}
+   if(c=='d'){
+  drop();
+  delay(2000);}
+}
+} 
+  void pick(){
+    for(int i=90; i>=0;i--){
+     S1.write(i);
+     delay(30); }
+     for(int i=20; i<=90;i++){
+     S3.write(i);
+     delay(30); }
+     for(int i=180; i>=85;i--){
+     S2.write(i);
+     delay(30); }
+     for(int i=0; i<=180;i++){
+     S4.write(i);
+     delay(30); }
+   }
+void drop(){
+    for(int i=85; i<=120;i++){
+     S2.write(i);
+     delay(30); }
+     for(int i=0; i<=180;i++){
+     S1.write(i);
+     delay(30); }
+     for(int i=120; i>=85;i--){
+     S2.write(i);
+     delay(30); }
+     for(int i=180; i>=0;i--){
+     S4.write(i);
+     delay(30); }
+     for(int i=85; i<=180;i++){
+     S2.write(i);
+     delay(30); }
+     for(int i=180; i>=90;i--){
+     S1.write(i);
+     delay(30); }
+     for(int i=90; i>=20;i--){
+     S3.write(i);
+     delay(30); }
+     }
+      Serial.println("s1 s2 s3 s4 ");
+  while(Serial.available()==0){
+  };
+    int s =Serial.parseInt(); 
+Serial.println("degree");
+  while(Serial.available()==0){
+  };
+    int deg=Serial.parseInt();
+    delay(1000);
+    if(s==1){
+      S1.write(deg); delay(500);
+    }
+    if(s==2){
+      S2.write(deg); delay(500);
+    }
+    if(s==3){
+      S3.write(deg); delay(500); 
+    }
+    if(s==4){
+    S4.write(deg); delay(500);
+     }
+     
