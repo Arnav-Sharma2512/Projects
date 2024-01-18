@@ -1,0 +1,78 @@
+package CGPACalculatorMainPackage;
+import java.util.Scanner;
+class Grades{
+	Scanner input=new Scanner(System.in);
+	void CGPA() {
+		System.out.println("Enter number of students: ");
+		int StuNum=input.nextInt();
+		for(int j=1;j<=StuNum;j++) {
+		System.out.print("Enter student's name: ");
+		String FName=input.next();System.out.print("");
+		String LName=input.next();
+		String StuNam=FName+" "+LName;
+		System.out.println("Enter number of subjects: ");
+		int SubNum=input.nextInt();
+		double GPAArray[]=new double[SubNum];
+		double credits[]=new double[SubNum];
+		double doubleValues[]=new double[SubNum];
+		char GradeArray[]=new char[SubNum];
+		double a=0;
+		for(int i=0;i<GradeArray.length;i++) {
+			System.out.println("Enter grade for subject "+(i+1)+" : ");
+			char grade=input.next().charAt(0);
+			GradeArray[i]=grade;
+			if(grade=='S') {
+				a=10;
+			}
+			else if(grade=='A') {
+				a=9;
+			}
+			else if(grade=='B') {
+				a=8;
+			}
+			else if(grade=='C') {
+				a=7;
+			}
+			else if(grade=='D') {
+				a=6;
+			}
+			else if(grade=='E') {
+				a=5;
+			}
+			else if(grade=='F') {
+				a=0;
+		}
+			doubleValues[i]=a;
+			}
+		for(int i=0;i<doubleValues.length;i++) {
+			System.out.println("Enter credit value for subject "+(i+1)+" : ");
+			double Credits=input.nextDouble();
+			credits[i]=Credits;
+			GPAArray[i]=doubleValues[i]*credits[i];
+		}
+		double sum=0;
+	for(double i:doubleValues) {
+		sum=sum+i;
+	}
+	double sum1=0;
+	for(double i:GPAArray) {
+		sum1=sum1+i;
+	}
+		double GPA=sum/SubNum;
+		System.out.println(StuNam+"'s GPA : "+GPA);
+		double CredSum=0;
+		for(double i:credits) {
+			CredSum=CredSum+i;
+		}
+		System.out.println(CredSum);
+		double CGPA=sum1/CredSum;
+		System.out.println(StuNam+"'s CGPA is "+CGPA);
+}
+}}
+public class CGPACalculatorMainClass extends Grades{
+
+	public static void main(String[] args) {
+		Grades ob=new Grades();
+		ob.CGPA();
+		}
+	}
